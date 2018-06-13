@@ -2,7 +2,7 @@
 
 namespace ToDo.Model.Model
 {
-    public class Task
+    public class Task :  BaseModel
     {
         public string Status { get; set; }
         public DateTime Deadline { get; set; }

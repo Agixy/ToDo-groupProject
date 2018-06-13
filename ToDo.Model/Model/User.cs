@@ -2,7 +2,7 @@
 
 namespace ToDo.Model.Model
 {
-    class User
+    public class User : BaseModel
     {
         public string Name { get; set; }
         public string Email { get; set; }
