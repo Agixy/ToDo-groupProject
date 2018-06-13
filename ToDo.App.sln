@@ -5,9 +5,9 @@ VisualStudioVersion = 15.0.27703.2018
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDo.App", "ToDo.App\ToDo.App.csproj", "{555857E1-BA9F-4A98-98FA-53A8CD7F4BBB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDo.Model", "ToDo.Model\ToDo.Model.csproj", "{51604D04-8FDE-48AE-85B0-D3BB6EB523EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDo.Model", "ToDo.Model\ToDo.Model.csproj", "{51604D04-8FDE-48AE-85B0-D3BB6EB523EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDo.DBConnection", "ToDo.DBConnection\ToDo.DBConnection.csproj", "{8A0BECE8-25E1-4953-A65A-5049F05D6316}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDo.DBConnection", "ToDo.DBConnection\ToDo.DBConnection.csproj", "{8A0BECE8-25E1-4953-A65A-5049F05D6316}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

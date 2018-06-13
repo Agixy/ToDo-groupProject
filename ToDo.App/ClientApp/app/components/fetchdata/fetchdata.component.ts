@@ -6,18 +6,27 @@ import { Http } from '@angular/http';
     templateUrl: './fetchdata.component.html'
 })
 export class FetchDataComponent {
-    public forecasts: WeatherForecast[];
+    public tasks: TaskDto[];
 
     constructor(http: Http, @Inject('BASE_URL') baseUrl: string) {
-        http.get(baseUrl + 'api/SampleData/WeatherForecasts').subscribe(result => {
-            this.forecasts = result.json() as WeatherForecast[];
+        http.get(baseUrl + 'api/Task').subscribe(result => {
+            this.tasks = result.json() as TaskDto[];
         }, error => console.error(error));
     }
 }
 
-interface WeatherForecast {
-    dateFormatted: string;
-    temperatureC: number;
-    temperatureF: number;
-    summary: string;
-}
+interface TaskDto {
+    Status: string;
+    Deadline: string;
+Title: string ;
+    Description: string;
+    Priority: string;
+
+    }
+
+//interface WeatherForecast {
+//    dateFormatted: string;
+//    temperatureC: number;
+//    temperatureF: number;
+//    summary: string;
+//}
