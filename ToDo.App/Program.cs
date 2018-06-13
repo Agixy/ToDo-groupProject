@@ -1,12 +1,9 @@
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
+using ToDo.DBConnection.DatabaseAccess;
 
 namespace ToDo.App
 {
@@ -14,12 +11,21 @@ namespace ToDo.App
     {
         public static void Main(string[] args)
         {
-            BuildWebHost(args).Run();
+            //BuildWebHost(args).Run();
+            var optionsBuilder = new DbContextOptionsBuilder<ServerContext>();
+            optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=ToDoDB;Trusted_Connection=True;");
+
+            using (var context = new ServerContext(optionsBuilder.Options))
+            { 
+                //var users = context.Users.ToList();
+                //foreach (var user in users)
+                //{
+                //    Console.WriteLine(user.Name);
+                //}
+            }
         }
 
         public static IWebHost BuildWebHost(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>()
-                .Build();
+            WebHost.CreateDefaultBuilder(args).UseStartup<Startup>().Build();
     }
 }
