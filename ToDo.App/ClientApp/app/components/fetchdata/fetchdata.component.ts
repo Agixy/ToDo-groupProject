@@ -8,19 +8,39 @@ import { Http } from '@angular/http';
 export class FetchDataComponent {
     public tasks: TaskDto[];
 
-    constructor(http: Http, @Inject('BASE_URL') baseUrl: string) {
-        http.get(baseUrl + 'api/Task').subscribe(
-            result =>
-            {
+    constructor(private http: Http, @Inject('BASE_URL') private baseUrl: string) {
+        this.refresh();
+    }
+
+    private refresh() {
+        this.http.get(this.baseUrl + 'api/Task').subscribe(
+            result => {
                 this.tasks = result.json() as TaskDto[];
             },
             error => {
                 console.error(error);
             });
     }
+
+    public chooseStatus(id: number, status: string) {
+        const patchBody = {
+            newStatus: status
+        };
+
+        this.http.patch(this.baseUrl + 'api/task/' + id, patchBody).subscribe(
+            result => {
+                this.refresh();
+            },
+            error => {
+                console.error(error);
+            });
+    }
+
+
 }
 
 interface TaskDto {
+    id: number;
     status: string;
     deadline: Date;
     title: string;

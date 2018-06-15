@@ -5,6 +5,7 @@ namespace ToDo.App.ViewModels
 {
     public class TaskDto
     {
+        public int Id { get; set; }
         public Status Status { get; set; }
         public DateTime Deadline { get; set; }
         public string Title { get; set; }

@@ -68,9 +68,13 @@ namespace ToDo.App.Controllers
         }
 
         [HttpPatch("{id}")]
-        public void PatchTask()
+        public void PatchTask(int id, [FromBody] TaskPatchDto patch)
         {
-
+            if (patch.NewStatus != null)
+            {
+                //pathc in base
+            }
+            
         }
     }
 }
