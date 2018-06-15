@@ -1,18 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Net;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Rest.TransientFaultHandling;
-using Newtonsoft.Json;
 using ToDo.App.ViewModels;
 using ToDo.Model.Model;
+using ToDo.DBConnection.DatabaseAccess;
 
 namespace ToDo.App.Controllers
 {
     [Route("api/[controller]")]
     public class TaskController : Controller
     {
+        private readonly ServerContext _serverContext;
+
+        public TaskController(ServerContext serverContext)
+        {
+            _serverContext = serverContext;
+        }
+
         [HttpPost]
         public void AddTask([FromBody] TaskDto task)
         {
@@ -63,7 +68,7 @@ namespace ToDo.App.Controllers
                     Deadline = DateTime.Now,
                     Description = "Opis2",
                     Priority = PriorityState.Low
-                }
+        }
             };
         }
 
