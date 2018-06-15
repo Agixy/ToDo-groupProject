@@ -12,16 +12,7 @@ namespace ToDo.App
     {
         public static void Main(string[] args)
         {
-            //BuildWebHost(args).Run();
-            var optionsBuilder = new DbContextOptionsBuilder<ServerContext>();
-            optionsBuilder.UseSqlServer("Server=(local);Database=ToDoDB;Integrated Security=true;");
-
-            using (var context = new ServerContext(optionsBuilder.Options))
-            {
-
-            }
-
-            Console.ReadKey();
+            BuildWebHost(args).Run();
         }
 
         public static IWebHost BuildWebHost(string[] args) =>
