@@ -26,22 +26,25 @@ namespace ToDo.App.Controllers
 
         }
 
-        public void DeleteTask()
+        [HttpDelete("{id}")]
+        public void DeleteTask(int id)
         {
-
+            
         }
 
-        [HttpGet]
+        [HttpGet("{id}")]
         public TaskDto GetTask()
         {
             return new TaskDto();
         }
 
+        [HttpGet]
         public IEnumerable<TaskDto> GetTasks()
         {
             return new List<TaskDto>{new TaskDto(), new TaskDto()};
         }
 
+        [HttpPatch("{id}")]
         public void PatchTask()
         {
 

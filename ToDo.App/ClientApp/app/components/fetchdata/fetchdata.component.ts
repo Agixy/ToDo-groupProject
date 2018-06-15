@@ -6,7 +6,7 @@ import { Http } from '@angular/http';
     templateUrl: './fetchdata.component.html'
 })
 export class FetchDataComponent {
-    public tasks: TaskDto[];
+    public tasks: TaskDto[] = [];
 
     constructor(http: Http, @Inject('BASE_URL') baseUrl: string) {
         http.get(baseUrl + 'api/Task').subscribe(result => {
@@ -17,16 +17,14 @@ export class FetchDataComponent {
 
 interface TaskDto {
     Status: string;
-    Deadline: string;
-Title: string ;
+    Deadline: Date;
+    Title: string ;
     Description: string;
-    Priority: string;
+    Priority: PriorityState;
+}
 
-    }
-
-//interface WeatherForecast {
-//    dateFormatted: string;
-//    temperatureC: number;
-//    temperatureF: number;
-//    summary: string;
-//}
+enum PriorityState {
+    Low,
+    Normal,
+    High
+}
