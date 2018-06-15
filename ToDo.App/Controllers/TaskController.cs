@@ -3,6 +3,7 @@ using System.Net;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Rest.TransientFaultHandling;
 using ToDo.App.ViewModels;
+using ToDo.Model.Model;
 using ToDo.DBConnection.DatabaseAccess;
 
 namespace ToDo.App.Controllers
@@ -40,13 +41,35 @@ namespace ToDo.App.Controllers
         [HttpGet("{id}")]
         public TaskDto GetTask()
         {
-            return new TaskDto();
+            return new TaskDto
+            {
+                Title = "Zadanie2",
+                Deadline = DateTime.Now,
+                Description = "Opis2",
+                Priority = PriorityState.Low
+            };
         }
 
         [HttpGet]
         public IEnumerable<TaskDto> GetTasks()
         {
-            return new List<TaskDto> { new TaskDto(), new TaskDto() };
+            return new List<TaskDto>
+            {
+                new TaskDto
+                {
+                    Title = "Zadanie1",
+                    Deadline = DateTime.Today,
+                    Description = "Opis",
+                    Priority = PriorityState.High
+                },
+                new TaskDto
+                {
+                    Title = "Zadanie2",
+                    Deadline = DateTime.Now,
+                    Description = "Opis2",
+                    Priority = PriorityState.Low
+        }
+            };
         }
 
         [HttpPatch("{id}")]
