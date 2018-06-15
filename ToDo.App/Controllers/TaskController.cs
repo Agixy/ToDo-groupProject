@@ -30,7 +30,7 @@ namespace ToDo.App.Controllers
         [HttpDelete("{id}")]
         public void DeleteTask(int id)
         {
-            
+            //logika przycisku delete, usuwanie rekordu z bazy
         }
 
         [HttpGet("{id}")]

@@ -26,7 +26,9 @@ interface TaskDto {
     title: string;
     description: string;
     priority: number;
+    //delete: string; //?
 }
+
 
 enum PriorityState {
     Low=0,
