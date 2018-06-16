@@ -12,6 +12,7 @@ export class FetchDataComponent {
     title: string = "";
     deadline: Date = (null) as any;
     description: string = "";
+    public status = Status;
 
     public newTask: { status: string; deadline: Date; description: string; priority: PriorityState; title: string } = {
         status: Status.ToDo,
