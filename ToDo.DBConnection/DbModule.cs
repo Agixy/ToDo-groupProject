@@ -10,8 +10,8 @@ namespace ToDo.DBConnection
 
         public DbModule(string connectionString)
         {
-            _connectionString = connectionString;
-
+            var manager = new PasswordManager();
+            _connectionString = manager.AddPassword(connectionString);
         }
 
         public override void Load()

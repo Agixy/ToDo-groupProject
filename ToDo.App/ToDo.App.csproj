@@ -24,6 +24,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="password.user">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ToDo.DBConnection\ToDo.DBConnection.csproj" />
     <ProjectReference Include="..\ToDo.Model\ToDo.Model.csproj" />
   </ItemGroup>
