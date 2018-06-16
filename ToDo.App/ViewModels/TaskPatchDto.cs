@@ -4,6 +4,6 @@ namespace ToDo.App.ViewModels
 {
     public class TaskPatchDto
     {
-        public Status? NewStatus { get; set; }
+        public Status? newStatus { get; set; }
     }
 }

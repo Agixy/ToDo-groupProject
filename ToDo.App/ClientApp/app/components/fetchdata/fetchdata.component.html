@@ -18,7 +18,16 @@
     </thead>
     <tbody>
     <tr *ngFor="let task of tasks">
-        <td>{{ task.status }}</td>
+        <td><div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{task.status}}
+            </button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                <li role="presentation"><button role="menuitem" (click)="chooseStatus(task.id, status.ToDo)">To Do</button></li>
+                <li role="presentation"><button role="menuitem" (click)="chooseStatus(task.id, status.InProgress)">In progress</button></li>
+                <li role="presentation"><button role="menuitem" (click)="chooseStatus(task.id, status.Done)">Done</button></li>
+            </ul>
+        </div></td>
         <td>{{ task.title }}</td>
         <td>{{ task.description }}</td>
         <td>{{ task.priority }}</td>
@@ -27,14 +36,3 @@
     </tr>
     </tbody>
 </table>
-
-<div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Dropdown button
-    </button>
-    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-        <li role="presentation"><button role="menuitem" (click)="chooseStatus()">Pierwsza opcja</button></li>
-        <li role="presentation"><button role="menuitem" (click)="chooseStatus()">Pierwsza opcja</button></li>
-        <li role="presentation"><button role="menuitem" (click)="chooseStatus()">Pierwsza opcja</button></li>
-    </ul>
-</div>

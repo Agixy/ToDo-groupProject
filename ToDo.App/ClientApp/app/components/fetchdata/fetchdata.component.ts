@@ -7,6 +7,7 @@ import { Http } from '@angular/http';
 })
 export class FetchDataComponent {
     public tasks: TaskDto[];
+    public status = Status;
 
     constructor(private http: Http, @Inject('BASE_URL') private baseUrl: string) {
         this.refresh();
@@ -49,7 +50,13 @@ interface TaskDto {
 }
 
 enum PriorityState {
-    Low=0,
-    Normal=1,
-    High=2
+    Low="Low",
+    Normal="Normal",
+    High="High"
+}
+
+enum Status {
+    ToDo = "ToDo",
+    InProgress = "InProgress",
+    Done = "Done"
 }

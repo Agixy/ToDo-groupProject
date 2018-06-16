@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Rest.TransientFaultHandling;
@@ -76,9 +77,11 @@ namespace ToDo.App.Controllers
         [HttpPatch("{id}")]
         public void PatchTask(int id, [FromBody] TaskPatchDto patch)
         {
-            if (patch.NewStatus != null)
-            {
-                //pathc in base
+            if (patch.newStatus != null)
+            {              
+               var task = _serverContext.Tasks.First(t => t.Id == id);
+                task.Status = patch.newStatus.Value;
+                _serverContext.SaveChanges();
             }
             
         }
