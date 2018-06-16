@@ -11,6 +11,7 @@ namespace ToDo.DBConnection
         public DbModule(string connectionString)
         {
             _connectionString = connectionString;
+
         }
 
         public override void Load()

@@ -53,6 +53,7 @@ namespace ToDo.App
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             Kernel = RegisterApplicationComponents(app);
+            Kernel.Get<ServerContext>().Database.Migrate();
 
             if (env.IsDevelopment())
             {
