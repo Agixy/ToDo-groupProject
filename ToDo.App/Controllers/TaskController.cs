@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Rest.TransientFaultHandling;
@@ -58,23 +59,7 @@ namespace ToDo.App.Controllers
         [HttpGet]
         public IEnumerable<TaskDto> GetTasks()
         {
-            return new List<TaskDto>
-            {
-                new TaskDto
-                {
-                    Title = "Zadanie1",
-                    Deadline = DateTime.Today,
-                    Description = "Opis",
-                    Priority = PriorityState.High
-                },
-                new TaskDto
-                {
-                    Title = "Zadanie2",
-                    Deadline = DateTime.Now,
-                    Description = "Opis2",
-                    Priority = PriorityState.Low
-        }
-            };
+            return _serverContext.Tasks.Select(_taskMapper.ConvertToTaskDto);
         }
 
         [HttpPatch("{id}")]
