@@ -1,5 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { Http } from '@angular/http';
+//import {TaskDto } from './TaskDto';
+
 
 @Component({
     selector: 'fetchdata',
@@ -8,7 +10,15 @@ import { Http } from '@angular/http';
 export class FetchDataComponent {
     public tasks: TaskDto[];
 
-    constructor(http: Http, @Inject('BASE_URL') baseUrl: string) {
+    public newTask: { status: string;deadline: string;description: string;priority: PriorityState;title: string } = {
+        status: "",
+        deadline: "1979-12-31",
+        description: "",
+        priority: PriorityState.High,
+        title: "",
+    };
+
+    constructor(private http: Http, @Inject('BASE_URL') private baseUrl: string) {
         http.get(baseUrl + 'api/Task').subscribe(
             result =>
             {
@@ -17,6 +27,19 @@ export class FetchDataComponent {
             error => {
                 console.error(error);
             });
+    }
+
+    onSubmit(): void {
+        //create task from submit
+         
+
+        //post task to server
+        this.http.post(this.baseUrl + 'api/Task', this.newTask);
+ 
+
+        //this.http.get('http://localhost:64951/api/user').subscribe(data => {
+        //    console.log(data);
+        //});
     }
 }
 

@@ -10,6 +10,5 @@ namespace ToDo.App.ViewModels
         public string Title { get; set; }
         public string Description { get; set; }
         public PriorityState Priority { get; set; }
-
     }
 }
