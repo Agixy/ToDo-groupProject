@@ -1,5 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { Http } from '@angular/http';
+//import {TaskDto } from './TaskDto';
+
 
 @Component({
     selector: 'fetchdata',
@@ -7,7 +9,18 @@ import { Http } from '@angular/http';
 })
 export class FetchDataComponent {
     public tasks: TaskDto[];
+    title: string = "";
+    deadline: Date = (null) as any;
+    description: string = "";
     public status = Status;
+
+    public newTask: { status: string; deadline: Date; description: string; priority: PriorityState; title: string } = {
+        status: Status.ToDo,
+        deadline: new Date(),
+        description: "",
+        priority: PriorityState.Low,
+        title: "",
+    };
 
     constructor(private http: Http, @Inject('BASE_URL') private baseUrl: string) {
         this.refresh();
@@ -48,20 +61,39 @@ export class FetchDataComponent {
         );
     }
 
+    onSubmit(): void {
+        this.addTask();
+    }
+
+    addTask(): void {
+        //create task from submit
+        this.newTask.title = this.title;
+        this.newTask.deadline = this.deadline;
+        this.newTask.description = this.description;
+
+        //post task to server
+        this.http.post(this.baseUrl + 'api/Task', this.newTask).subscribe(result => {
+            this.title = "";
+            this.deadline = new Date();
+            this.description = "";
+            this.refresh();
+            console.log("Task has been added");
+        });
+    }
+
 }
 
 interface TaskDto {
-    id: number;
-    status: string;
+    status: Status;
     deadline: Date;
     title: string;
     description: string;
-    priority: number;
+    priority: PriorityState;
 }
 
 
 enum PriorityState {
-    Low="Low",
+    Low = "Low",
     Normal="Normal",
     High="High"
 }

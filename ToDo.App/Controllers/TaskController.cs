@@ -14,18 +14,22 @@ namespace ToDo.App.Controllers
     public class TaskController : Controller
     {
         private readonly ServerContext _serverContext;
+        private readonly ITaskMapper _taskMapper;
 
-        public TaskController(ServerContext serverContext)
+        public TaskController(ServerContext serverContext, ITaskMapper taskMapper)
         {
             _serverContext = serverContext;
+            _taskMapper = taskMapper;
         }
 
         [HttpPost]
-        public void AddTask([FromBody] TaskDto task)
+        public void AddTask([FromBody] TaskDto taskDto)
         {
-            if (task != null)
+            if (taskDto != null)
             {
-                // add to base
+                var task = _taskMapper.ConvertToTask(taskDto);
+                _serverContext.Add(task);
+                _serverContext.SaveChanges();
             }
             else
             {           
@@ -57,24 +61,7 @@ namespace ToDo.App.Controllers
         [HttpGet]
         public IEnumerable<TaskDto> GetTasks()
         {
-            return new List<TaskDto>
-            {
-                new TaskDto
-                {
-                    Id=1,
-                    Title = "Zadanie1",
-                    Deadline = DateTime.Today,
-                    Description = "Opis",
-                    Priority = PriorityState.High
-                },
-                new TaskDto
-                {
-                    Title = "Zadanie2",
-                    Deadline = DateTime.Now,
-                    Description = "Opis2",
-                    Priority = PriorityState.Low
-        }
-            };
+            return _serverContext.Tasks.Select(_taskMapper.ConvertToTaskDto);
         }
 
         [HttpPatch("{id}")]
