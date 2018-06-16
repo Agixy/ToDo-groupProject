@@ -32,7 +32,7 @@
         <td>{{ task.description }}</td>
         <td>{{ task.priority }}</td>
         <td>{{ task.deadline }}</td>
-            <button type="button" class="btn btn-danger" ng-show="!inactive">X</button>
+            <button (click)="deleteTask(task.id)" type="button" class="btn btn-danger">X</button>
     </tr>
     </tbody>
 </table>

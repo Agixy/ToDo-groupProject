@@ -37,6 +37,16 @@ export class FetchDataComponent {
             });
     }
 
+    public deleteTask(id: number) {
+        this.http.delete(this.baseUrl + 'api/task/' + id).subscribe(
+            result => {
+                this.refresh();
+            },
+            error => {
+                console.error(error);
+            }
+        );
+    }
 
 }
 
@@ -47,7 +57,6 @@ interface TaskDto {
     title: string;
     description: string;
     priority: number;
-    //delete: string; //?
 }
 
 

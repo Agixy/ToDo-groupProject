@@ -37,9 +37,11 @@ namespace ToDo.App.Controllers
         [HttpDelete("{id}")]
         public void DeleteTask(int id)
         {
-            //logika przycisku delete, usuwanie rekordu z bazy
+                var deleteTask = _serverContext.Tasks.First(t => t.Id == id);
+                _serverContext.Remove(deleteTask);
+                _serverContext.SaveChanges();
         }
-
+   
         [HttpGet("{id}")]
         public TaskDto GetTask()
         {
@@ -59,6 +61,7 @@ namespace ToDo.App.Controllers
             {
                 new TaskDto
                 {
+                    Id=1,
                     Title = "Zadanie1",
                     Deadline = DateTime.Today,
                     Description = "Opis",
