@@ -9,11 +9,12 @@ import { Http } from '@angular/http';
 })
 export class FetchDataComponent {
     public tasks: TaskDto[];
+<<<<<<< HEAD
     title: string = "";
     deadline: Date = (null) as any;
     description: string = "";
 
-    public newTask: { status: string; deadline: Date; description: string; priority: PriorityState; title: string } = {
+    public newTask: { status: string;deadline: Date;description: string;priority: PriorityState;title: string } = {
         status: Status.ToDo,
         deadline: new Date(),
         description: "",
@@ -22,12 +23,20 @@ export class FetchDataComponent {
     };
 
     constructor(private http: Http, @Inject('BASE_URL') private baseUrl: string) {
+        http.get(baseUrl + 'api/Task').subscribe(
+            result =>
+            {
+=======
+    public status = Status;
+
+    constructor(private http: Http, @Inject('BASE_URL') private baseUrl: string) {
         this.refresh();
     }
 
     private refresh() {
         this.http.get(this.baseUrl + 'api/Task').subscribe(
             result => {
+>>>>>>> origin/develop
                 this.tasks = result.json() as TaskDto[];
             },
             error => {
@@ -35,6 +44,26 @@ export class FetchDataComponent {
             });
     }
 
+<<<<<<< HEAD
+    onSubmit(): void {
+        //create task from submit
+        this.newTask.title = this.title;
+        this.newTask.deadline = this.deadline;
+        this.newTask.description = this.description;
+
+        //post task to server
+        this.http.post(this.baseUrl + 'api/Task', this.newTask).subscribe(result => {
+            this.title = "";
+            this.deadline = new Date();
+            this.description = "";
+            console.log("Task has been added");
+        });
+ }
+}
+
+interface TaskDto {
+    status: Status;
+=======
     public chooseStatus(id: number, status: string) {
         const patchBody = {
             newStatus: status
@@ -49,30 +78,13 @@ export class FetchDataComponent {
             });
     }
 
-    onSubmit(): void {
-        this.addTask();
-    }
-
-    addTask(): void {
-        //create task from submit
-        this.newTask.title = this.title;
-        this.newTask.deadline = this.deadline;
-        this.newTask.description = this.description;
-
-        //post task to server
-        this.http.post(this.baseUrl + 'api/Task', this.newTask).subscribe(result => {
-            this.title = "";
-            this.deadline = new Date();
-            this.description = "";
-            this.refresh();
-            console.log("Task has been added");
-        });
-    }
 
 }
 
 interface TaskDto {
-    status: Status;
+    id: number;
+    status: string;
+>>>>>>> origin/develop
     deadline: Date;
     title: string;
     description: string;
@@ -80,9 +92,15 @@ interface TaskDto {
 }
 
 enum PriorityState {
-    Low=0,
-    Normal=1,
-    High=2
+    Low="Low",
+    Normal="Normal",
+    High="High"
+}
+
+enum Status {
+    ToDo = "ToDo",
+    InProgress = "InProgress",
+    Done = "Done"
 }
 
 enum Status {
