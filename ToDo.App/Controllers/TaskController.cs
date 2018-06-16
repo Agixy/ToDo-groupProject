@@ -41,9 +41,11 @@ namespace ToDo.App.Controllers
         [HttpDelete("{id}")]
         public void DeleteTask(int id)
         {
-            
+                var deleteTask = _serverContext.Tasks.First(t => t.Id == id);
+                _serverContext.Remove(deleteTask);
+                _serverContext.SaveChanges();
         }
-
+   
         [HttpGet("{id}")]
         public TaskDto GetTask()
         {

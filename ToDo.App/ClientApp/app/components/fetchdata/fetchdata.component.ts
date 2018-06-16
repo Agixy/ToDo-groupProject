@@ -50,6 +50,17 @@ export class FetchDataComponent {
             });
     }
 
+    public deleteTask(id: number) {
+        this.http.delete(this.baseUrl + 'api/task/' + id).subscribe(
+            result => {
+                this.refresh();
+            },
+            error => {
+                console.error(error);
+            }
+        );
+    }
+
     onSubmit(): void {
         this.addTask();
     }
@@ -79,6 +90,7 @@ interface TaskDto {
     description: string;
     priority: PriorityState;
 }
+
 
 enum PriorityState {
     Low = "Low",
