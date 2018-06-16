@@ -1,5 +1,26 @@
 <h1>Tasks</h1>
 
+<!--formularz-->
+<h1>Hero Form</h1>
+<form (ngSubmit)="onSubmit()" #heroForm="ngForm">
+    <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" class="form-control" id="title"  [(ngModel)]="title">
+    </div>
+
+    <div class="form-group">
+        <label for="description">Description</label>
+        <input type="text" class="form-control" id="description" required [value]="newTask.description">
+    </div>
+
+    <div class="form-group">
+        <label for="deadline">Deadline(yyyy-mm-dd)</label>
+        <input type="date" class="form-control" id="deadline" required [value]="newTask.deadline">
+    </div>
+    <button type="submit" class="btn btn-success">Submit</button>
+</form>
+
+<br />
 <p>List of tasks</p>
 
 <p *ngIf="!tasks"><em>Loading...</em></p>

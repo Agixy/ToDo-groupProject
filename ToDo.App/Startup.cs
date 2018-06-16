@@ -71,7 +71,7 @@ namespace ToDo.App
         private IKernel RegisterApplicationComponents(IApplicationBuilder app)
         {
             // IKernelConfiguration config = new KernelConfiguration();
-            var kernel = new StandardKernel(new DbModule(Configuration["ConnectionStrings:ToDoDB"]));
+            var kernel = new StandardKernel(new DbModule(Configuration["ConnectionStrings:ToDoDB"]), new TaskModule());
 
             // Register application services
             foreach (var ctrlType in app.GetControllerTypes())
