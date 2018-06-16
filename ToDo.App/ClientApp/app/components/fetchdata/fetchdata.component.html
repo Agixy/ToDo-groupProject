@@ -1,24 +1,59 @@
-<h1>Weather forecast</h1>
+<h1>Tasks</h1>
 
-<p>This component demonstrates fetching data from the server.</p>
+<!--formularz-->
+<h1>Hero Form</h1>
+<form (ngSubmit)="onSubmit()" #heroForm="ngForm">
+    <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" class="form-control" id="title" [(ngModel)]="title" [ngModelOptions]="{standalone: true}"> 
+    </div>
 
-<p *ngIf="!forecasts"><em>Loading...</em></p>
+    <div class="form-group">
+        <label for="description">Description</label>
+        <input type="text" class="form-control" id="description" [(ngModel)]="description" [ngModelOptions]="{standalone: true}">
+    </div>
 
-<table class='table' *ngIf="forecasts">
+    <div class="form-group">
+        <label for="deadline">Deadline(yyyy-mm-dd)</label>
+        <input type="date" class="form-control" id="deadline" [(ngModel)]="deadline" [ngModelOptions]="{standalone: true}">
+    </div>
+    <button type="submit" class="btn btn-success">Submit</button>
+</form>
+
+<br />
+<p>List of tasks</p>
+
+<p *ngIf="!tasks"><em>Loading...</em></p>
+
+
+<table class='table' *ngIf="tasks">
     <thead>
-        <tr>
-            <th>Date</th>
-            <th>Temp. (C)</th>
-            <th>Temp. (F)</th>
-            <th>Summary</th>
-        </tr>
+    <tr>
+        <th>Status</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Priority</th>
+        <th>Deadline</th>
+            <th>Delete</th>
+    </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let forecast of forecasts">
-            <td>{{ forecast.dateFormatted }}</td>
-            <td>{{ forecast.temperatureC }}</td>
-            <td>{{ forecast.temperatureF }}</td>
-            <td>{{ forecast.summary }}</td>
-        </tr>
+    <tr *ngFor="let task of tasks">
+        <td><div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{task.status}}
+            </button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                <li role="presentation"><button role="menuitem" (click)="chooseStatus(task.id, status.ToDo)">To Do</button></li>
+                <li role="presentation"><button role="menuitem" (click)="chooseStatus(task.id, status.InProgress)">In progress</button></li>
+                <li role="presentation"><button role="menuitem" (click)="chooseStatus(task.id, status.Done)">Done</button></li>
+            </ul>
+        </div></td>
+        <td>{{ task.title }}</td>
+        <td>{{ task.description }}</td>
+        <td>{{ task.priority }}</td>
+        <td>{{ task.deadline }}</td>
+            <button (click)="deleteTask(task.id)" type="button" class="btn btn-danger">X</button>
+    </tr>
     </tbody>
 </table>
