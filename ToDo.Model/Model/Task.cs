@@ -2,7 +2,7 @@
 
 namespace ToDo.Model.Model
 {
-    public class Task :  BaseModel
+    public class Task : BaseModel
     {
         public Status Status { get; set; }
         public DateTime Deadline { get; set; }
@@ -24,7 +24,4 @@ namespace ToDo.Model.Model
         InProgress,
         Done
     }
-
-     
-   
 }

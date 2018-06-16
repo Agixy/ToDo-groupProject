@@ -32,8 +32,8 @@ namespace ToDo.App.Controllers
                 _serverContext.SaveChanges();
             }
             else
-            {           
-                throw new HttpRequestWithStatusException("Pusty obiekt"){StatusCode = HttpStatusCode.BadRequest};
+            {
+                throw new HttpRequestWithStatusException("Pusty obiekt") { StatusCode = HttpStatusCode.BadRequest };
             }
 
         }
@@ -41,11 +41,11 @@ namespace ToDo.App.Controllers
         [HttpDelete("{id}")]
         public void DeleteTask(int id)
         {
-                var deleteTask = _serverContext.Tasks.First(t => t.Id == id);
-                _serverContext.Remove(deleteTask);
-                _serverContext.SaveChanges();
+            var deleteTask = _serverContext.Tasks.First(t => t.Id == id);
+            _serverContext.Remove(deleteTask);
+            _serverContext.SaveChanges();
         }
-   
+
         [HttpGet("{id}")]
         public TaskDto GetTask()
         {
@@ -68,12 +68,23 @@ namespace ToDo.App.Controllers
         public void PatchTask(int id, [FromBody] TaskPatchDto patch)
         {
             if (patch.newStatus != null)
-            {              
-               var task = _serverContext.Tasks.First(t => t.Id == id);
+            {
+                var task = _serverContext.Tasks.First(t => t.Id == id);
                 task.Status = patch.newStatus.Value;
                 _serverContext.SaveChanges();
             }
-            
         }
+
+        [HttpPatch("priority/{id}")]
+        public void ChangePriority(int id, [FromBody] TaskPatchDto patch)
+        {
+            if (patch.newPriority != null)
+            {
+                var task = _serverContext.Tasks.First(t => t.Id == id);
+                task.Priority = patch.newPriority.Value;
+                _serverContext.SaveChanges();
+            }
+        }
+
     }
 }

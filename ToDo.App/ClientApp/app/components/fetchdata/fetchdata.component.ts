@@ -5,7 +5,8 @@ import { Http } from '@angular/http';
 
 @Component({
     selector: 'fetchdata',
-    templateUrl: './fetchdata.component.html'
+    templateUrl: './fetchdata.component.html',
+    styleUrls: ['./fetchdata.component.css']
 })
 export class FetchDataComponent {
     public tasks: TaskDto[];
@@ -13,6 +14,7 @@ export class FetchDataComponent {
     deadline: Date = (null) as any;
     description: string = "";
     public status = Status;
+    public priorityState = PriorityState;
 
     public newTask: { status: string; deadline: Date; description: string; priority: PriorityState; title: string } = {
         status: Status.ToDo,
@@ -42,6 +44,20 @@ export class FetchDataComponent {
         };
 
         this.http.patch(this.baseUrl + 'api/task/' + id, patchBody).subscribe(
+            result => {
+                this.refresh();
+            },
+            error => {
+                console.error(error);
+            });
+    }
+
+    public choosePriority(id: number, priorityState: string) {
+        const patchBody = {
+            newPriority: priorityState
+        };
+        
+        this.http.patch(this.baseUrl + 'api/task/priority/' + id, patchBody).subscribe(
             result => {
                 this.refresh();
             },

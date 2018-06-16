@@ -1,11 +1,10 @@
-<h1>Tasks</h1>
+ 
 
-<!--formularz-->
-<h1>Hero Form</h1>
+<h2>Create task</h2>
 <form (ngSubmit)="onSubmit()" #heroForm="ngForm">
     <div class="form-group">
         <label for="title">Title</label>
-        <input type="text" class="form-control" id="title" [(ngModel)]="title" [ngModelOptions]="{standalone: true}"> 
+        <input type="text" class="form-control" id="title" [(ngModel)]="title" [ngModelOptions]="{standalone: true}">
     </div>
 
     <div class="form-group">
@@ -17,7 +16,7 @@
         <label for="deadline">Deadline(yyyy-mm-dd)</label>
         <input type="date" class="form-control" id="deadline" [(ngModel)]="deadline" [ngModelOptions]="{standalone: true}">
     </div>
-    <button type="submit" class="btn btn-success">Submit</button>
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Create</button>
 </form>
 
 <br />
@@ -39,21 +38,37 @@
     </thead>
     <tbody>
     <tr *ngFor="let task of tasks">
-        <td><div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                {{task.status}}
-            </button>
-            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                <li role="presentation"><button role="menuitem" (click)="chooseStatus(task.id, status.ToDo)">To Do</button></li>
-                <li role="presentation"><button role="menuitem" (click)="chooseStatus(task.id, status.InProgress)">In progress</button></li>
-                <li role="presentation"><button role="menuitem" (click)="chooseStatus(task.id, status.Done)">Done</button></li>
-            </ul>
-        </div></td>
+        <td>
+            <div class="dropdown">
+                <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{task.status}}
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" (click)="chooseStatus(task.id, status.ToDo)">To Do</a>
+                    <a class="dropdown-item" (click)="chooseStatus(task.id, status.InProgress)">In progress</a>
+                    <a class="dropdown-item" (click)="chooseStatus(task.id, status.Done)">Done</a> 
+                </div>
+            </div>
+
+        </td>
         <td>{{ task.title }}</td>
-        <td>{{ task.description }}</td>
-        <td>{{ task.priority }}</td>
+        <td>{{ task.description }}</td> 
+        <td>
+            <div class="dropdown">
+                <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{task.priority}}
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" (click)="choosePriority(task.id, priorityState.Low)">Low</a>
+                    <a class="dropdown-item" (click)="choosePriority(task.id, priorityState.Normal)">Normal</a>
+                    <a class="dropdown-item" (click)="choosePriority(task.id, priorityState.High)">High</a> 
+                </div>
+            </div>
+        </td>
         <td>{{ task.deadline }}</td>
+        <td>
             <button (click)="deleteTask(task.id)" type="button" class="btn btn-danger">X</button>
+        </td>
     </tr>
     </tbody>
 </table>
