@@ -9,12 +9,15 @@ import { Http } from '@angular/http';
 })
 export class FetchDataComponent {
     public tasks: TaskDto[];
+    title: string = "";
+    deadline: Date = (null) as any;
+    description: string = "";
 
-    public newTask: { status: string;deadline: string;description: string;priority: PriorityState;title: string } = {
-        status: "",
-        deadline: "1979-12-31",
+    public newTask: { status: string;deadline: Date;description: string;priority: PriorityState;title: string } = {
+        status: Status.ToDo,
+        deadline: new Date(),
         description: "",
-        priority: PriorityState.High,
+        priority: PriorityState.Low,
         title: "",
     };
 
@@ -31,28 +34,36 @@ export class FetchDataComponent {
 
     onSubmit(): void {
         //create task from submit
-         
+        this.newTask.title = this.title;
+        this.newTask.deadline = this.deadline;
+        this.newTask.description = this.description;
 
         //post task to server
-        this.http.post(this.baseUrl + 'api/Task', this.newTask);
- 
-
-        //this.http.get('http://localhost:64951/api/user').subscribe(data => {
-        //    console.log(data);
-        //});
-    }
+        this.http.post(this.baseUrl + 'api/Task', this.newTask).subscribe(result => {
+            this.title = "";
+            this.deadline = new Date();
+            this.description = "";
+            console.log("Task has been added");
+        });
+ }
 }
 
 interface TaskDto {
-    status: string;
+    status: Status;
     deadline: Date;
     title: string;
     description: string;
-    priority: number;
+    priority: PriorityState;
 }
 
 enum PriorityState {
     Low=0,
     Normal=1,
     High=2
+}
+
+enum Status {
+    ToDo = "ToDo",
+    InProgress = "InProgress",
+    Done = "Done"
 }
