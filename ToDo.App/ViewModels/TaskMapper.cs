@@ -14,7 +14,8 @@ namespace ToDo.App.ViewModels
                 Priority = taskDto.Priority,
                 Description = taskDto.Description,
                 Title = taskDto.Title,
-                Status = taskDto.Status
+                Status = taskDto.Status,
+                Id = taskDto.Id
             };
         }
 
@@ -26,7 +27,8 @@ namespace ToDo.App.ViewModels
                 Description = task.Description,
                 Priority = task.Priority,
                 Title = task.Title,
-                Status = task.Status
+                Status = task.Status,
+                Id = task.Id
             };
         }
     }
