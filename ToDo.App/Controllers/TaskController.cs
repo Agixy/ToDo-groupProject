@@ -63,9 +63,15 @@ namespace ToDo.App.Controllers
         }
 
         [HttpPatch("{id}")]
-        public void PatchTask()
+        public void PatchTask(int id, [FromBody] TaskPatchDto patch)
         {
-
+            if (patch.newStatus != null)
+            {              
+               var task = _serverContext.Tasks.First(t => t.Id == id);
+                task.Status = patch.newStatus.Value;
+                _serverContext.SaveChanges();
+            }
+            
         }
     }
 }

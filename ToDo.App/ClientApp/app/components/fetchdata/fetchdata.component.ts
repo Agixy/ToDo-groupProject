@@ -13,18 +13,13 @@ export class FetchDataComponent {
     deadline: Date = (null) as any;
     description: string = "";
 
-    public newTask: { status: string;deadline: Date;description: string;priority: PriorityState;title: string } = {
-        status: Status.ToDo,
-        deadline: new Date(),
-        description: "",
-        priority: PriorityState.Low,
-        title: "",
-    };
+      constructor(private http: Http, @Inject('BASE_URL') private baseUrl: string) {
+        this.refresh();
+    }
 
-    constructor(private http: Http, @Inject('BASE_URL') private baseUrl: string) {
-        http.get(baseUrl + 'api/Task').subscribe(
-            result =>
-            {
+    private refresh() {
+        this.http.get(this.baseUrl + 'api/Task').subscribe(
+            result => {
                 this.tasks = result.json() as TaskDto[];
             },
             error => {
@@ -32,7 +27,21 @@ export class FetchDataComponent {
             });
     }
 
-    onSubmit(): void {
+    public chooseStatus(id: number, status: string) {
+        const patchBody = {
+            newStatus: status
+        };
+
+        this.http.patch(this.baseUrl + 'api/task/' + id, patchBody).subscribe(
+            result => {
+                this.refresh();
+            },
+            error => {
+                console.error(error);
+            });
+    }
+
+onSubmit(): void {
         //create task from submit
         this.newTask.title = this.title;
         this.newTask.deadline = this.deadline;
@@ -46,6 +55,10 @@ export class FetchDataComponent {
             console.log("Task has been added");
         });
  }
+
+}
+
+
 }
 
 interface TaskDto {

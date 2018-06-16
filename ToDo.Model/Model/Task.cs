@@ -4,7 +4,7 @@ namespace ToDo.Model.Model
 {
     public class Task :  BaseModel
     {
-        public string Status { get; set; }
+        public Status Status { get; set; }
         public DateTime Deadline { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
@@ -17,4 +17,14 @@ namespace ToDo.Model.Model
         Normal,
         High
     }
+
+    public enum Status
+    {
+        ToDo,
+        InProgress,
+        Done
+    }
+
+     
+   
 }
