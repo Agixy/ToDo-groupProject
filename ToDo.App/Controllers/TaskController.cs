@@ -61,7 +61,7 @@ namespace ToDo.App.Controllers
         [HttpGet]
         public IEnumerable<TaskDto> GetTasks()
         {
-            return _serverContext.Tasks.Select(_taskMapper.ConvertToTaskDto);
+            return _serverContext.Tasks.Select(_taskMapper.ConvertToTaskDto).OrderByDescending(t => t.Priority);
         }
 
         [HttpPatch("{id}")]
