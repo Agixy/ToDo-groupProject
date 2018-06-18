@@ -56,7 +56,7 @@ export class FetchDataComponent {
             newPriority: priorityState
         };
         
-        this.http.patch(this.baseUrl + 'api/task/priority/' + id, patchBody).subscribe(
+        this.http.patch(this.baseUrl + 'api/task/' + id, patchBody).subscribe(
             result => {
                 this.refresh();
             },

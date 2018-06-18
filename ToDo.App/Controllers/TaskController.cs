@@ -73,18 +73,13 @@ namespace ToDo.App.Controllers
                 task.Status = patch.newStatus.Value;
                 _serverContext.SaveChanges();
             }
-        }
 
-        [HttpPatch("priority/{id}")]
-        public void ChangePriority(int id, [FromBody] TaskPatchDto patch)
-        {
-            if (patch.newPriority != null)
+            else if (patch.newPriority != null)
             {
                 var task = _serverContext.Tasks.First(t => t.Id == id);
                 task.Priority = patch.newPriority.Value;
                 _serverContext.SaveChanges();
             }
-        }
-
+        } 
     }
 }
